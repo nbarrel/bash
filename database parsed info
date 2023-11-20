@@ -1,0 +1,32 @@
+# Here is a second script that grabs the field information from the tables in the database.
+
+#!/bin/bash
+#
+#Variables
+DB=$1
+USER=$2
+PASS=$3
+mypass=""
+# If statement to add password if entered
+if ($# == 3); then
+	mypass="-p $PASS"
+fi
+#
+#For loop to build a select on the first 2 columns of the table
+#
+for FILE in *.desc; do
+	TABLE=$(echo $FILE | cut –d’.’ –f1) # get the part before .desc into table
+	echo “Contents of the Table: $TABLE” # display what we’re doing
+	tmp1=$(sed –n ‘2,2p’ $FILE) # get the first field name (line 2)
+	tmp2=$(sed –n ‘3,3p’ $FILE) # get the second field name (line 3)
+	FIELD1=$(echo tmp1 | cut –d’ ‘ –f1) # get the field name from inside the line
+	FIELD2=$(echo tmp2 | cut –d’ ‘ –f1) # get the second field name
+#
+# Execute the Select Statement
+mysql –u $USER $mypass $DB –e “select $FIELD1,$FIELD2 from $TABLE;”
+#
+done
+#error reporting
+if ($? -ne 0); then
+	Echo "ERROR $?"
+fi
