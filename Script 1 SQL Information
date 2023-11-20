@@ -1,0 +1,37 @@
+#This is one of the first scipts I wrote for my Linux class
+#this is to go through and give a brief description in what is in the database
+
+#!/bin/bash
+
+#Script Check list
+#1 MYSQL TABLES
+# 	Get table information
+# 	Describe the 3 tables in legacy
+#		category manufacturer product
+#2 FOR LOOP WITH CAT
+
+#lets set a directory variable where i can have all files in
+DIR=/home/student/script
+Echo "changing directory to $DIR"
+
+# I need the tables from Legacy
+# This command in a variable will give me the option of repeating it in next steps
+# this outputs the 3 table names in plain text
+
+TABLES=$(mysql -u root -N Legacy -e 'show tables;' | grep -v '+') 
+
+# Now I need table description in file with <tablename>.desc
+# the command for MYSQL is Describe each and have it automated for loop
+# need more variables and the ability to take output and put it into a loop
+# old variables like $tables help
+
+for table in $TABLES; do 
+	echo $table
+	mysql -u root Legacy -e 'DESC '$table';' > "$table.desc"
+done
+
+
+#Cat command to list the information - FOR LOOP
+#$DIR gives me directory so I only have to type it once
+
+for i in $DIR/*.desc; do cat "$i"; done
