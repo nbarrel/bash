@@ -1,0 +1,10 @@
+#!/bin/bash
+# 100 days by nbarrel
+#April 11 2024
+
+# Make it count to 10 "
+
+for i in {1..10}; do
+    echo $i
+done
+
