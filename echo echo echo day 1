@@ -1,0 +1,9 @@
+#!/bin/bash
+#Cant forget my shebangs
+
+# 100 days by nbarrel
+#April 10 2024
+
+# Lets start with the most basic of all the hello world mine will display "Have a wonderful day!"
+
+echo "Have a wonderful day!"
