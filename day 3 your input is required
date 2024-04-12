@@ -1,0 +1,10 @@
+# 100 days by nbarrel
+#April 12 2024
+#your input is required
+# have a simple greeting with reading the persons name
+
+#!/bin/bash
+
+echo "Good day may you please type your name"
+read name
+echo "Good day $name I hope you have a wonderful day!"
