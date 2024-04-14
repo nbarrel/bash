@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#100 days by nbarrel
+#April 14 2024
+#Day 4
+#Files and directories
+#lets interact and create/modify simple files and directories
+
+#Learned about dirname. if you have a path to a file such as below dirname with parse the path and pull the directory out)
+file_path="/path/to/your/file.txt"
+directory_path="$(dirname "$file_path")"
+text_to_write="Have a wonderful day! Bash"
+
+#our lucky if checks
+
+if [ -f "$file_path" ]; then
+    echo "File exists."
+    echo $text_to_write >> "$file_path"
+else
+    echo "File does not exist. Making path"
+    mkdir -p "$directory_path" 
+    touch "$file_path" 
+    echo "$text_to_write" >> "$file_path"
+fi
+
+cat "$file_path"
