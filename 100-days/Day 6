@@ -1,0 +1,32 @@
+#100 days by nbarrel
+#April 20 2024
+#Day 6
+# Dealing with CSV's 
+#This Exercise is from some work I had to do a while ago. I was frequently handed CSV files and had to parse them to exract the info
+#A common example is when you are doing software maintaince and need to find out when the last time the software contacted the servers.
+
+#!/bin/bash
+
+file_path="data.csv"
+today=$(date +%s)
+less_30_days=0
+more_60_days=0
+#My learning point here is "IFS=," this is individual field spearator this is used to parse the contents of a csv file, so if the delimitor is a period "IFS=." 
+while IFS=, read -r hostname version last_response
+do
+#The if statement helps skip the heading line
+  if [[ $hostname != "Hostname" ]]; then
+    response_date=$(date -d "$last_response" +%s)
+#because bash utilizes seconds for date naturally it makes for easy math! for all you that like random facts there is 86400 seconds in a day
+    let diff_days=($today-$response_date)/86400
+    if [ $diff_days -le 30 ]; then
+      ((less_30_days++))
+    elif [ $diff_days -gt 60 ]; then
+      ((more_60_days++))
+    fi
+  fi
+#if the "< $file_path" is not present the loop will break this portion puts the file back into the loop to be processed on the next itieration
+done < $file_path
+
+echo "Hosts with last response within last 30 days: $less_30_days"
+echo "Hosts with last response more than 60 days ago: $more_60_days"
