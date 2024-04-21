@@ -1,0 +1,24 @@
+#100 days by nbarrel
+#April 20 2024
+#Day 6
+#Let's check disk space
+#Checking disk space may be a task that is required. even though most enterprise systems have monitors this is useful
+#When you have look at systems not attched to the monitoring solution.
+#I wanted to showcase some other ways of approaching outputs. I wanted it to disply in the terminal and output to a file.
+#Tee is a great example of this and it works well for PS and BASH
+
+#!/bin/bash
+
+# Set the alert threshold to 90%
+threshold=90
+log_file="disk_usage.log"
+
+# Check disk usage and process each line
+df -H | grep -vE '^Filesystem|tmpfs|cdrom' | awk '{ print $5 " " $1 }' | while read output;
+do
+  echo $output | tee -a "$log_file"
+  usage=$(echo $output | awk '{ print $1}' | cut -d'%' -f1  )
+  if [ $usage -ge $threshold ]; then
+    echo "Running out of space: $output" | tee -a "$log_file"
+  fi
+done
