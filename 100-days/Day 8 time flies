@@ -1,0 +1,15 @@
+#100 days by nbarrel
+#April 23 2024
+#Day 8
+#Simple Time and date things
+#Lets display the time every 5 secs
+#simple loops, display time, useful when doing logging such as my gardening project
+
+#!/bin/bash
+
+for i in {1..3}
+do
+#String format here as well making it useful to input as text
+    echo $(date +"%Y-%m-%d %H:%M:%S")  
+    sleep 5  # Pause for 5 seconds
+done
