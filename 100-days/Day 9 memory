@@ -1,0 +1,10 @@
+#100 days by nbarrel
+#April 24 2024
+#Day 9
+#Lets find the amount of ram
+
+#!/bin/bash
+
+total_memory=$(free -m | awk '/^Mem:/{print $2 / 1024}') 
+echo "Total Memory: $total_memory GB"
+
