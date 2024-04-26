@@ -1,0 +1,10 @@
+#100 days by nbarrel
+#April 25 2024
+#Day 10
+#Listening in
+
+#!/bin/bash
+
+
+netstat -tulnp
+#or ss -tulnp
