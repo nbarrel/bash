@@ -1,0 +1,7 @@
+#100 days by nbarrel
+#MAY 15 2024
+#Day 11
+#!/bin/bash
+
+# This will give the list of the top 10 processes if you want change the value of head, or use tail to get bottom of the list
+ps -eo pid,comm,%mem --sort=-%mem | head -n 10
