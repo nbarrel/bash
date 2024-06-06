@@ -1,0 +1,17 @@
+# 100 days by nbarrel
+#Day 13 
+#scraping
+#June 6 2024
+
+
+#!/bin/bash
+
+
+read -p "Enter the URL of the website to scrape: " url
+response=$(curl -sL "$url")
+if [ $? -eq 0 ]; then
+    echo "Fetched content :"
+    echo "$response"
+else
+    echo "Failed to retrieve the web page"
+fi
